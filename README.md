@@ -18,3 +18,4 @@
 ### May Implement ###
 
 * Add native support for Jupyter Notebooks 
+* Add a hyperlink to online compiler to copy paste and run and practice any programs (if needed)
