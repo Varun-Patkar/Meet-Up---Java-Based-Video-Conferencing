@@ -1,29 +1,20 @@
-# README #
+# Java Mini Project(Unnamed) #
 
-This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Implemented ###
+* Nothing
 
-### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Ideas to be Implemented ###
 
-### Contribution guidelines ###
+* Multiple People Video and Audio Transfer
+* A general chat with ability to add files
+* An Assignment Tab for teachers to assign assignments and students to submit
+* 3 Types of users- Super User, Teacher, Student(Accounts, etc.)
 
-* Writing tests
-* Code review
-* Other guidelines
 
-### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+### May Implement ###
+
+* Add native support for Jupyter Notebooks 
