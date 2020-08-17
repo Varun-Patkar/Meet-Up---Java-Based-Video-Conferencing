@@ -8,7 +8,16 @@
 <body>
     <h1>This is the homepage</h1>
     <p>Please make this good yash,vedant and manav</p>
+    <form th:action="@{/meeting}" th:object="${query}" method="post" class="form-signin" role="form" autocomplete="off" action="#" >
+        <label for="id">Meeting ID</label><br>
+        <input type="text"id="email" name="email" placeholder="Meeting ID" th:field="*{id}" class="form-control" /><br>
+        <label for="meetingPassword">Meeting Password</label><br>
+        <input type="password" placeholder="Meeting Password" id="password" name="password" th:field="*{meetingPassword}" class="form-control" /><br>
+        <button type="submit" class="btn btn-primary btn-block"  name="Submit" >Join Meeting</button>
+    </form>
     <br>
-    <p>Making Some Changes</p>
+    <h1>OR</h1>
+    <br>
+    <button><a href="/create-meeting">Create Meeting</a></button>
 </body>
 </html>
