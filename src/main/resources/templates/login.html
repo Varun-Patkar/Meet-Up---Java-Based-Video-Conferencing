@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form th:action="@{/login}" method="post" class="form-signin" role="form" autocomplete="off" action="#" >
+        <div class="form-group">
+            <div class="">
+                <input type="text"id="email" name="email" th:placeholder="Email" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="">
+                <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="">
+                <button type="submit" class="btn btn-primary btn-block"  name="Submit" value="Login" th:text="Login">Register User</button>
+            </div>
+        </div>
+        <div align="center" th:if="${param.error}">
+            <p style="font-size: 20; color: #FF1C19;">Email or Password is invalid.</p>
+        </div>
+    </form>
+</body>
+</html>
