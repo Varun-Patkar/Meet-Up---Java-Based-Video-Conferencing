@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalab.miniproject.Login.User;
 import com.javalab.miniproject.Service.UserService;
@@ -32,6 +33,8 @@ import com.javalab.miniproject.Service.UserService;
 public class MiniprojectController {
 	@Autowired
 	UserService userService;
+	
+	Meeting currentMeeting=new Meeting();
 	
 	@Autowired
 	private MeetingRepository meetingRepository;
@@ -50,6 +53,11 @@ public class MiniprojectController {
 	public PasswordEncoder passwordEncoder1() {
 	    return new BCryptPasswordEncoder();
 	}
+	
+	
+	
+	
+	
 	@PostMapping("/join-meeting")
 	public ModelAndView meeting(@ModelAttribute("query") Query query,Principal principal) {
 		if (query.getId()==0L ||query.getMeetingPassword()==null) {
@@ -76,13 +84,19 @@ public class MiniprojectController {
 		else {
 			Meeting meeting =byID.get(0);
 			meeting.addParticipant(userService.findUserByEmail(principal.getName()).getId());
+			currentMeeting=meeting;
 			meetingRepository.delete(byID.get(0));
 			meetingRepository.save(meeting);
-			mav=new ModelAndView("redirect:/");//redirect to meeting
+			mav=new ModelAndView("redirect:/meeting");
 			mav.addObject("loggedin",principal!=null);
 			return mav;
 		}
 	}
+	
+	
+	
+	
+	
 	@RequestMapping(value = { "/create-meeting" }, method = RequestMethod.GET)
 	public ModelAndView create_meeting(Principal principal) {
 		ModelAndView mav=new ModelAndView();
@@ -92,12 +106,37 @@ public class MiniprojectController {
 	    Meeting meeting = new Meeting(userService.findUserByEmail(principal.getName()).getId());
 	    meeting.setUnencrpass(pass);
 		meeting.setMeetingPassword(passwordEncoder1().encode(pass));
+		currentMeeting=meeting;
 		meetingRepository.save(meeting);
-		mav.addObject("error", String.valueOf(meeting.getId())+"  "+pass);
-		mav.setViewName("error.html");//redirect to meeting
+		mav=new ModelAndView("redirect:/meeting");
 		mav.addObject("loggedin",principal!=null);
 		return mav;
 	}
+	
+	
+	
+	
+	@GetMapping("/meeting")
+	@ResponseBody
+	public ModelAndView meeting(Model model,Principal principal){
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title","Meeting-"+currentMeeting.getId());
+		mav.addObject("meeting_id",currentMeeting.getId());
+		mav.addObject("meeting_password", currentMeeting.getUnencrpass());
+		mav.setViewName("meeting.html");
+		return mav;
+	}
+	
+	
+	@GetMapping("/exit-meeting")
+	@ResponseBody
+	public ModelAndView exit_meeting(Model model,Principal principal){
+		meetingRepository.delete(currentMeeting);
+		currentMeeting=new Meeting();
+		return new ModelAndView("redirect:/");
+	}
+	
+
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView login(Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();

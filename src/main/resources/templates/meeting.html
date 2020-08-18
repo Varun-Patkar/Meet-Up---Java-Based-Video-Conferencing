@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <h3>Meeting ID-<span th:text="${meeting_id}"></span></h3>
+    <h3>Meeting Password-<span th:text="${meeting_password}"></span></h3>
+    <button><a href="/exit-meeting">Exit Meeting</a></button>
+</body>
+</html>
