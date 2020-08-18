@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+</head>
+<body>
+    <h1>Error</h1>
+    <br>
+    <li><a href="/">Home</a></li>
+    <li><a href="/create-meeting">Create Meeting</a></li>
+    <li th:if="${loggedin}"><a href="/logout">Sign Out</a></li>
+    <li th:if="${not loggedin}"><a href="/login">Login</a></li>
+    <li th:if="${not loggedin}"><a href="/register">Register</a></li>
+    <br>
+    <br>
+    <h2 th:text="${error}"></h2>
+</body>
+</html>
