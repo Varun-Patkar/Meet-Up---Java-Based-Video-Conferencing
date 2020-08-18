@@ -45,8 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").permitAll()
 				.antMatchers("/register").permitAll()
-				.antMatchers("/Patients/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
-				.antMatchers("/PatientsDelete/**").hasAnyAuthority("ADMIN_USER")
+				.antMatchers("/create-meeting/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
+				.antMatchers("/join-meeting/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
 				.anyRequest().authenticated()
 				.and()
 				// form login

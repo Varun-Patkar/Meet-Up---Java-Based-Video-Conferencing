@@ -15,16 +15,38 @@ import javax.persistence.Table;
 public class Meeting {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public long id;
 	
-	public int host_id;
+	private int host_id;
 	
 	@ElementCollection(targetClass=Integer.class)
 	private Set<Integer> participants_id;
 	
+	private String meetingPassword;
+	
+	private String unencrpass;
+	
+	public String getUnencrpass() {
+		return unencrpass;
+	}
+
+	public void setUnencrpass(String unencrpass) {
+		this.unencrpass = unencrpass;
+	}
+
+	public String getMeetingPassword() {
+		return meetingPassword;
+	}
+
+	public void setMeetingPassword(String meetingPassword) {
+		this.meetingPassword = meetingPassword;
+	}
 	public Meeting() {
-		host_id=0;
+		
+	}
+	public Meeting(int id) {
+		host_id=id;
 		participants_id=new HashSet<Integer>();
 	}
 	

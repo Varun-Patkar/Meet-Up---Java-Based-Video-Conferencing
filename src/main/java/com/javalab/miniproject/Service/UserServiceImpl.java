@@ -2,7 +2,7 @@ package com.javalab.miniproject.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,10 +39,10 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
-//	@Override
-//	public User findUserByEmail(String name) {
-//		return userRepository.findByEmail(name);
-//	}
+	@Override
+	public User findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 
 }

@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 //Repository interface for DB
 @Repository
 public interface MeetingRepository extends JpaRepository<Meeting, Long>{
-//	List<Meeting> findBynameAndDate(String name, String date);
+	List<Meeting> findByIdAndMeetingPassword(long id, String meetingPassword);
+	List<Meeting> findById(long id);
 }
