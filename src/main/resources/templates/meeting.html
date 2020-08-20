@@ -8,6 +8,19 @@
 <body>
     <h3>Meeting ID-<span th:text="${meeting_id}"></span></h3>
     <h3>Meeting Password-<span th:text="${meeting_password}"></span></h3>
-    <button><a href="/exit-meeting">Exit Meeting</a></button>
+    <div>
+		<h3 style="margin: 5px">Other Person</h3>
+		<video style="width: 50vh; height: 50vh;" id="remoteVideo"
+			poster="https://img.icons8.com/fluent/48/000000/person-male.png" autoplay></video>
+	</div>
+ 
+	<!-- Your camera video will show up here. -->
+	<div>
+		<h3 style="margin: 5px">You</h3>
+		<video style="width: auto; height: 20vh;" id="localVideo"
+			poster="https://img.icons8.com/fluent/48/000000/person-male.png" autoplay muted></video>
+	</div>
+    <button id="leaveButton"><a href="/exit-meeting">Exit Meeting</a></button>
+    <script src="/js/meeting.js?reload=true"></script>
 </body>
 </html>

@@ -81,4 +81,7 @@ public class Meeting {
 	public void addParticipant(int participant_id) {
 		participants_id.add(participant_id);
 	}
+	public void removeParticipant(int participant_id) {
+		participants_id.remove(participant_id);
+	}
 }

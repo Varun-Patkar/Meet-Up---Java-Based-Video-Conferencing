@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalab.miniproject.Login.User;
 import com.javalab.miniproject.Service.UserService;
@@ -38,6 +35,7 @@ public class MiniprojectController {
 	
 	@Autowired
 	private MeetingRepository meetingRepository;
+	
 	
 	@GetMapping("/")
 	@ResponseBody
@@ -55,8 +53,7 @@ public class MiniprojectController {
 	}
 	
 	
-	
-	
+
 	
 	@PostMapping("/join-meeting")
 	public ModelAndView meeting(@ModelAttribute("query") Query query,Principal principal) {
@@ -124,6 +121,7 @@ public class MiniprojectController {
 		mav.addObject("meeting_id",currentMeeting.getId());
 		mav.addObject("meeting_password", currentMeeting.getUnencrpass());
 		mav.setViewName("meeting.html");
+		mav.addObject("loggedin",principal!=null);
 		return mav;
 	}
 	
@@ -131,9 +129,18 @@ public class MiniprojectController {
 	@GetMapping("/exit-meeting")
 	@ResponseBody
 	public ModelAndView exit_meeting(Model model,Principal principal){
-		meetingRepository.delete(currentMeeting);
-		currentMeeting=new Meeting();
-		return new ModelAndView("redirect:/");
+		if(currentMeeting.getParticipants_id().contains(userService.findUserByEmail(principal.getName()).getId())) {
+			currentMeeting.removeParticipant(userService.findUserByEmail(principal.getName()).getId());
+			return new ModelAndView("redirect:/");
+		}
+		else if(currentMeeting.getHost_id()==userService.findUserByEmail(principal.getName()).getId()){
+			meetingRepository.delete(currentMeeting);
+			currentMeeting=new Meeting();
+			return new ModelAndView("redirect:/");
+		}
+		else {
+			return new ModelAndView("redirect:/");
+		}
 	}
 	
 
