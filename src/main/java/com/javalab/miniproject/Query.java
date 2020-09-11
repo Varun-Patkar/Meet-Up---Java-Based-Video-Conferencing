@@ -23,4 +23,5 @@ public Query() {
 		this.meetingPassword = meetingPassword;
 	}
 	
+	
 }

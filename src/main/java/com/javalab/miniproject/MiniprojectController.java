@@ -52,9 +52,7 @@ public class MiniprojectController {
 	    return new BCryptPasswordEncoder();
 	}
 	
-	
 
-	
 	@PostMapping("/join-meeting")
 	public ModelAndView meeting(@ModelAttribute("query") Query query,Principal principal) {
 		if (query.getId()==0L ||query.getMeetingPassword()==null) {
