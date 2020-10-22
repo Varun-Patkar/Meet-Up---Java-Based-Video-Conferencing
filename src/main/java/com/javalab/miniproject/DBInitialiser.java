@@ -11,9 +11,9 @@ public class DBInitialiser implements CommandLineRunner{
 	
 	//Initialise DB on startup
 	@Autowired
-	public DBInitialiser(MeetingRepository patientsRepository) {
+	public DBInitialiser(MeetingRepository meetingRepository) {
 		// TODO Auto-generated constructor stub
-		this.meetingRepository=patientsRepository;
+		this.meetingRepository=meetingRepository;
 	}
 	
 	//Adding Default values to local DB

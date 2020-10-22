@@ -1,6 +1,7 @@
 package com.javalab.miniproject;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.javalab.miniproject.Login.User;
 import com.javalab.miniproject.Service.UserService;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 
 
 
@@ -31,7 +34,10 @@ public class MiniprojectController {
 	@Autowired
 	UserService userService;
 	
-	Meeting currentMeeting=new Meeting();
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
+	long currentMeetingID;
 	
 	@Autowired
 	private MeetingRepository meetingRepository;
@@ -62,7 +68,7 @@ public class MiniprojectController {
 			mav.addObject("loggedin",principal!=null);
 			return mav;
 		}
-		List<Meeting> byID=meetingRepository.findById(query.getId());
+		List<Meeting> byID=meetingRepository.findByMeetingid(query.getId());
 		ModelAndView mav=new ModelAndView();
 		if (byID==null){
 			mav.addObject("error","No such Meeting exists");
@@ -79,7 +85,6 @@ public class MiniprojectController {
 		else {
 			Meeting meeting =byID.get(0);
 			meeting.addParticipant(userService.findUserByEmail(principal.getName()).getId());
-			currentMeeting=meeting;
 			meetingRepository.delete(byID.get(0));
 			meetingRepository.save(meeting);
 			mav=new ModelAndView("redirect:/meeting");
@@ -98,10 +103,14 @@ public class MiniprojectController {
 		Random rnd = new Random();
 	    int number = rnd.nextInt(999999);
 	    String pass=String.format("%06d", number);
-	    Meeting meeting = new Meeting(userService.findUserByEmail(principal.getName()).getId());
+	    long meeting_id=123456;
+	    do {
+	    meeting_id=rnd.nextInt(900000)+100000;
+	    }while(meetingRepository.findByMeetingid(meeting_id).size()!=0);
+	    Meeting meeting = new Meeting(meeting_id,userService.findUserByEmail(principal.getName()).getId());
 	    meeting.setUnencrpass(pass);
 		meeting.setMeetingPassword(passwordEncoder1().encode(pass));
-		currentMeeting=meeting;
+		currentMeetingID=meeting_id;
 		meetingRepository.save(meeting);
 		mav=new ModelAndView("redirect:/meeting");
 		mav.addObject("loggedin",principal!=null);
@@ -115,9 +124,16 @@ public class MiniprojectController {
 	@ResponseBody
 	public ModelAndView meeting(Model model,Principal principal){
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("title","Meeting-"+currentMeeting.getId());
-		mav.addObject("meeting_id",currentMeeting.getId());
-		mav.addObject("meeting_password", currentMeeting.getUnencrpass());
+		Meeting meeting=meetingRepository.findByMeetingid(currentMeetingID).get(0);
+		mav.addObject("title","Meeting-"+meeting.getId());
+		mav.addObject("meeting_id",meeting.getId());
+		mav.addObject("meeting_password", meeting.getUnencrpass());
+		List<Integer> participants_id=meeting.getParticipants_id();
+		List<String> participants_name=new ArrayList<String>();
+		for(Integer participant_id:participants_id) {
+			participants_name.add(userService.findUserById(participant_id).getName()+" "+userService.findUserById(participant_id).getLastName());
+		}
+		mav.addObject("participants_name",participants_name);
 		mav.setViewName("meeting.html");
 		mav.addObject("loggedin",principal!=null);
 		return mav;
@@ -127,13 +143,13 @@ public class MiniprojectController {
 	@GetMapping("/exit-meeting")
 	@ResponseBody
 	public ModelAndView exit_meeting(Model model,Principal principal){
-		if(currentMeeting.getParticipants_id().contains(userService.findUserByEmail(principal.getName()).getId())) {
-			currentMeeting.removeParticipant(userService.findUserByEmail(principal.getName()).getId());
+		Meeting meeting=meetingRepository.findByMeetingid(currentMeetingID).get(0);
+		if(meeting.getParticipants_id().contains(userService.findUserByEmail(principal.getName()).getId())) {
+			jdbcTemplate.update("DELETE FROM `miniproject_db`.`meeting_participants_id` WHERE (`meeting_id` = '"+meeting.getId1()+"');");
 			return new ModelAndView("redirect:/");
 		}
-		else if(currentMeeting.getHost_id()==userService.findUserByEmail(principal.getName()).getId()){
-			meetingRepository.delete(currentMeeting);
-			currentMeeting=new Meeting();
+		else if(meeting.getHost_id()==userService.findUserByEmail(principal.getName()).getId()){
+			jdbcTemplate.update("DELETE FROM `miniproject_db`.`meeting` WHERE (`id` = '"+meeting.getId1()+"');");
 			return new ModelAndView("redirect:/");
 		}
 		else {

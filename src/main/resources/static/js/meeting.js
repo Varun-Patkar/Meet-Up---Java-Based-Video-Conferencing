@@ -1,11 +1,11 @@
 const leaveButton = document.getElementById('leaveButton');
 leaveButton.addEventListener('click', leave);
- 
+
 function leave() {
     console.log('Ending call');
     peerConnection.close();
     signalingWebsocket.close();
-    window.location.href = './index.html';
+    window.location.href = './exit-meeting';
 };
 var signalingWebsocket = new WebSocket('ws://'+window.location.host+'/socket');
 
@@ -38,7 +38,7 @@ function sendSignal(signal) {
  * Initialize
  */
 function init() {
-    console.log("Connected to signaling endpoint. Now initializing.");    
+    console.log("Connected to signaling endpoint. Now initializing.");
     preparePeerConnection();
     displayLocalStreamAndSignal(true);
 
@@ -47,7 +47,7 @@ function init() {
  * Prepare RTCPeerConnection & setup event handlers.
  */
 function preparePeerConnection() {
-    
+
     // Using free public google STUN server.
    const configuration = {
        iceServers: [{
@@ -66,10 +66,10 @@ function preparePeerConnection() {
            sendSignal(event);
        }
    };
-   
+
    /*
     * Track other participant's remote stream & display in UI when available.
-    * 
+    *
     * This is how other participant's video & audio will start showing up on my
     * browser as soon as his local stream added to track of peer connection in
     * his UI.
@@ -117,7 +117,7 @@ async function displayLocalStreamAndSignal(firstTime) {
 /*
  * Add local webcam & audio stream to peer connection so that other
  * participant's UI will be notified using 'track' event.
- * 
+ *
  * This is how my video & audio is sent to other participant's UI.
  */
 async function addLocalStreamToPeerConnection(localStream) {

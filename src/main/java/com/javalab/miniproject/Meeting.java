@@ -1,7 +1,7 @@
 package com.javalab.miniproject;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,18 +14,20 @@ import javax.persistence.Table;
 @Table(name = "meeting")
 public class Meeting {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public long id;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
+	
+	public long meetingid;
 	
 	private int host_id;
 	
 	@ElementCollection(targetClass=Integer.class)
-	private Set<Integer> participants_id;
+	private List<Integer> participants_id;
 	
 	private String meetingPassword;
 	
 	private String unencrpass;
+	
 	
 	public String getUnencrpass() {
 		return unencrpass;
@@ -45,26 +47,29 @@ public class Meeting {
 	public Meeting() {
 		
 	}
-	public Meeting(int id) {
-		host_id=id;
-		participants_id=new HashSet<Integer>();
+	public Meeting(long meetingid,int host_id) {
+		this.meetingid=meetingid;
+		this.host_id=host_id;
+		participants_id=new ArrayList<Integer>();
 	}
 	
-	public Meeting(int host_id,Set<Integer> participants_id) {
+	public Meeting(long meetingid,int host_id,List<Integer> participants_id) {
+		this.meetingid=meetingid;
 		this.host_id=host_id;
 		this.participants_id=participants_id;
 	}
 	
-	public Meeting(int host_id,int participant_id) {
-		this.host_id=host_id;
-		addParticipant(participant_id);
-	}
-	
-	public long getId() {
+	public long getId1() {
 		return id;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setId1(long id) {
+		this.id=id;
+	}
+	public long getId() {
+		return meetingid;
+	}
+	public void setId(long meetingid) {
+		this.meetingid = meetingid;
 	}
 	public int getHost_id() {
 		return host_id;
@@ -72,16 +77,19 @@ public class Meeting {
 	public void setHost_id(int host_id) {
 		this.host_id = host_id;
 	}
-	public Set<Integer> getParticipants_id() {
+	public List<Integer> getParticipants_id() {
 		return participants_id;
 	}
-	public void setParticipants_id(Set<Integer> participants_id) {
+	public void setParticipants_id(List<Integer> participants_id) {
 		this.participants_id = participants_id;
 	}
 	public void addParticipant(int participant_id) {
-		participants_id.add(participant_id);
+		participants_id.add(new Integer(participant_id));
 	}
 	public void removeParticipant(int participant_id) {
-		participants_id.remove(participant_id);
+		participants_id.remove(new Integer(participant_id));
+	}
+	public void removeAllParticipants() {
+		participants_id=new ArrayList<Integer>();
 	}
 }

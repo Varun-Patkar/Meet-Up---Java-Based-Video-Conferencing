@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MeetingRepository extends JpaRepository<Meeting, Long>{
 	List<Meeting> findByIdAndMeetingPassword(long id, String meetingPassword);
-	List<Meeting> findById(long id);
+	List<Meeting> findByMeetingid(long meeting_id);
 }
