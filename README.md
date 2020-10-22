@@ -3,7 +3,7 @@
 
 
 ### Implemented ###
-* Nothing
+* 2 Preople meeting prototype ready 
 
 
 ### Ideas to be Implemented ###
