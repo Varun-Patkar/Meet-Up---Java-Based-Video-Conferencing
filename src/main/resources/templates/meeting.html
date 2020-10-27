@@ -104,7 +104,7 @@ var config = {
     var joinRoomButton = tr.querySelector('.join');
     joinRoomButton.setAttribute('data-broadcaster', room.broadcaster);
     joinRoomButton.setAttribute('data-roomToken', room.roomToken);
-    joinRoomButton.onload = function() {
+    joinRoomButton.onclick = function() {
       this.disabled = true;
 
       var broadcaster = this.getAttribute('data-broadcaster');
