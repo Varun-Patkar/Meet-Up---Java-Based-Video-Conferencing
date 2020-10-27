@@ -26,9 +26,6 @@ import com.javalab.miniproject.Login.User;
 import com.javalab.miniproject.Service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-
-
-
 @Controller
 public class MiniprojectController {
 	@Autowired
@@ -41,7 +38,6 @@ public class MiniprojectController {
 	
 	@Autowired
 	private MeetingRepository meetingRepository;
-	
 	
 	@GetMapping("/")
 	@ResponseBody
@@ -89,6 +85,7 @@ public class MiniprojectController {
 			meetingRepository.save(meeting);
 			mav=new ModelAndView("redirect:/meeting");
 			mav.addObject("loggedin",principal!=null);
+			mav.addObject("host", false);
 			return mav;
 		}
 	}
@@ -113,6 +110,7 @@ public class MiniprojectController {
 		currentMeetingID=meeting_id;
 		meetingRepository.save(meeting);
 		mav=new ModelAndView("redirect:/meeting");
+		mav.addObject("host", "true");
 		mav.addObject("loggedin",principal!=null);
 		return mav;
 	}
