@@ -11,6 +11,12 @@
   <script src="https://www.webrtc-experiment.com/CodecsHandler.js"></script>
   <script src="https://www.webrtc-experiment.com/RTCPeerConnection-v1.5.js"> </script>
   <script src="https://www.webrtc-experiment.com/video-conferencing/conference.js"> </script>
+  <script>
+      if(!location.hash.replace('#', '').length) {
+          location.href = location.href.split('#')[0] + '#' + "[[${meeting_id}]]";
+          location.reload();
+      }
+  </script>
 </head>
 <body>
   <h3>Meeting ID-<span th:text="${meeting_id}"></span></h3>
@@ -31,8 +37,8 @@ poster="https://img.icons8.com/fluent/48/000000/person-male.png" autoplay muted>
     <!-- <span>
       Private ?? <a href="/video-conferencing/" target="_blank" title="Open this link in new tab. Then your conference room will be private!"><code><strong id="unique-token">#123456789</strong></code></a>
     </span> -->
-    <span th:if="${host==true}">
-    <input type="hidden" id="conference-name" placeholder="Conference Name" value=[[${meeting_id}]]>
+    <span th:unless="${host==false}">
+    <input type="hidden" id="conference-name" placeholder="Conference Name" th:value="${meeting_id}">
     <button id="setup-new-room" class="setup">Join</button>
     </span>
   </section>
@@ -202,7 +208,7 @@ function rotateVideo(video) {
   var uniqueToken = document.getElementById('unique-token');
   if (uniqueToken)
   if (location.hash.length > 2) uniqueToken.parentNode.parentNode.parentNode.innerHTML = '<h2 style="text-align:center;display: block;"><a href="' + location.href + '" target="_blank">Right click to copy & share this private link</a></h2>';
-  else uniqueToken.innerHTML = uniqueToken.parentNode.parentNode.href = '#' + (Math.random() * new Date().getTime()).toString(36).toUpperCase().replace( /\./g , '-');
+  else uniqueToken.innerHTML = uniqueToken.parentNode.parentNode.href = '#' + "[[${meeting_id}]]";
 })();
 
 function scaleVideos() {
