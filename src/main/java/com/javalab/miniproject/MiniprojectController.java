@@ -25,10 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.javalab.miniproject.Login.User;
 import com.javalab.miniproject.Service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-
-
-
 @Controller
 public class MiniprojectController {
 	@Autowired
@@ -42,7 +38,9 @@ public class MiniprojectController {
 	@Autowired
 	private MeetingRepository meetingRepository;
 	
-	
+
+	boolean host=false;
+
 	@GetMapping("/")
 	@ResponseBody
 	public ModelAndView HomePage(Model model, Principal principal) {
@@ -61,11 +59,11 @@ public class MiniprojectController {
 
 	@PostMapping("/join-meeting")
 	public ModelAndView meeting(@ModelAttribute("query") Query query,Principal principal) {
+		host=false;
 		if (query.getId()==0L ||query.getMeetingPassword()==null) {
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("error","Please reenter ID and password");
 			mav.setViewName("error.html");
-			mav.addObject("loggedin",principal!=null);
 			return mav;
 		}
 		List<Meeting> byID=meetingRepository.findByMeetingid(query.getId());
@@ -73,13 +71,11 @@ public class MiniprojectController {
 		if (byID==null){
 			mav.addObject("error","No such Meeting exists");
 			mav.setViewName("error.html");
-			mav.addObject("loggedin",principal!=null);
 			return mav;
 		}
 		else if (!passwordEncoder1().matches(query.getMeetingPassword(),byID.get(0).getMeetingPassword())){
 			mav.addObject("error","Wrong Password for the meeting");
 			mav.setViewName("error.html");
-			mav.addObject("loggedin",principal!=null);
 			return mav;
 		}
 		else {
@@ -88,7 +84,7 @@ public class MiniprojectController {
 			meetingRepository.delete(byID.get(0));
 			meetingRepository.save(meeting);
 			mav=new ModelAndView("redirect:/meeting");
-			mav.addObject("loggedin",principal!=null);
+			host=false;
 			return mav;
 		}
 	}
@@ -113,7 +109,7 @@ public class MiniprojectController {
 		currentMeetingID=meeting_id;
 		meetingRepository.save(meeting);
 		mav=new ModelAndView("redirect:/meeting");
-		mav.addObject("loggedin",principal!=null);
+		host=true;
 		return mav;
 	}
 	
@@ -133,9 +129,9 @@ public class MiniprojectController {
 		for(Integer participant_id:participants_id) {
 			participants_name.add(userService.findUserById(participant_id).getName()+" "+userService.findUserById(participant_id).getLastName());
 		}
+		mav.addObject("host", host);
 		mav.addObject("participants_name",participants_name);
 		mav.setViewName("meeting.html");
-		mav.addObject("loggedin",principal!=null);
 		return mav;
 	}
 	
@@ -143,6 +139,7 @@ public class MiniprojectController {
 	@GetMapping("/exit-meeting")
 	@ResponseBody
 	public ModelAndView exit_meeting(Model model,Principal principal){
+		host=false;
 		Meeting meeting=meetingRepository.findByMeetingid(currentMeetingID).get(0);
 		if(meeting.getParticipants_id().contains(userService.findUserByEmail(principal.getName()).getId())) {
 			jdbcTemplate.update("DELETE FROM `miniproject_db`.`meeting_participants_id` WHERE (`meeting_id` = '"+meeting.getId1()+"');");
