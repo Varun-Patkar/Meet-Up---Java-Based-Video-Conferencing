@@ -149,11 +149,11 @@ public class MiniprojectController {
 		host=false;
 		Meeting meeting=meetingRepository.findByMeetingid(currentMeetingID).get(0);
 		if(meeting.getParticipants_id().contains(userService.findUserByEmail(principal.getName()).getId())) {
-			jdbcTemplate.update("DELETE FROM `miniproject_db`.`meeting_participants_id` WHERE (`meeting_id` = '"+meeting.getId1()+"');");
+			jdbcTemplate.update("DELETE FROM meeting_participants_id WHERE (meeting_id = '"+meeting.getId1()+"');");
 			return new ModelAndView("redirect:/");
 		}
 		else if(meeting.getHost_id()==userService.findUserByEmail(principal.getName()).getId()){
-			jdbcTemplate.update("DELETE FROM `miniproject_db`.`meeting` WHERE (`id` = '"+meeting.getId1()+"');");
+			jdbcTemplate.update("DELETE FROM meeting WHERE (id = '"+meeting.getId1()+"');");
 			return new ModelAndView("redirect:/");
 		}
 		else {
@@ -166,7 +166,7 @@ public class MiniprojectController {
 	public ModelAndView login(Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("loggedin",principal!=null);
-		modelAndView.setViewName("login"); // resources/template/login.html
+		modelAndView.setViewName("login.html"); // resources/template/login.html
 		return modelAndView;
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -175,7 +175,7 @@ public class MiniprojectController {
 		modelAndView.addObject("loggedin",principal!=null);
 		User user = new User();
 		modelAndView.addObject("user", user); 
-		modelAndView.setViewName("register"); // resources/template/register.html
+		modelAndView.setViewName("register.html"); // resources/template/register.html
 		return modelAndView;
 	}
 	
@@ -198,7 +198,7 @@ public class MiniprojectController {
 			mav.addObject("message", "User has been registered successfully!!");
 		}
 		mav.addObject("user", new User());
-		mav.setViewName("register");
+		mav.setViewName("register.html");
 		return mav;
 	}
 }
