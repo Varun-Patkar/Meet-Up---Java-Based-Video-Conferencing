@@ -48,13 +48,13 @@ public class Meeting {
 		
 	}
 	public Meeting(long meetingid,int host_id) {
-		this.meetingid=meetingid;
+		this.meeting_id=meetingid;
 		this.host_id=host_id;
 		participants_id=new ArrayList<Integer>();
 	}
 	
 	public Meeting(long meetingid,int host_id,List<Integer> participants_id) {
-		this.meetingid=meetingid;
+		this.meeting_id=meetingid;
 		this.host_id=host_id;
 		this.participants_id=participants_id;
 	}
@@ -66,10 +66,10 @@ public class Meeting {
 		this.id=id;
 	}
 	public long getId() {
-		return meetingid;
+		return meeting_id;
 	}
 	public void setId(long meetingid) {
-		this.meetingid = meetingid;
+		this.meeting_id = meetingid;
 	}
 	public int getHost_id() {
 		return host_id;
