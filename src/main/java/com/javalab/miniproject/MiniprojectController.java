@@ -198,7 +198,7 @@ public class MiniprojectController {
 			mav.addObject("message", "User has been registered successfully!!");
 		}
 		mav.addObject("user", new User());
-		mav.setViewName("register");
+		mav.setViewName("register.html");
 		return mav;
 	}
 }
