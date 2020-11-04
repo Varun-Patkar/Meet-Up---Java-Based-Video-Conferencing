@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initialscale=1.0">
+  <title>Meet Up - About Us</title>
+  <link rel = "icon" href = "videoconference.png" type =
+  "image/x-icon">
+  <style type="text/css">
+  *{
+    margin:0;
+    padding:0;
+  }
+  body
+  {
+    background-image:url("images/meetup.png");
+    background-color: #FFFFFF;
+    margin-top: 40px;
+    background-position: right;
+    background-size: cover;
+    font-family: sans-serif;
+    margin:0px;
+  }
+  .topnav {
+    overflow: hidden;
+  }
+  .topnav a {
+    display: block;
+    color: black;
+    text-align: justify;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent;
+  }
+  .topnav a:hover {
+    border-bottom: 3px solid black;
+  }
+  .topnav a.active {
+    border-bottom: 3px solid black;
+  }
+  img{
+    width: 3%;
+    height: 3%;
+  }
+  button{
+    background-color: #3BAF9F;
+    display: block;
+    margin:20px 0px 0px 20px;
+    text-align: center;
+    border-radius: 12px;
+    border:2px solid #366473;
+    padding: 14px 14px;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    transform: 0.25px;
+    margin-left: 35%;
+  }
+  button:hover{
+    background-color:#5390F5;
+  }
+  ul {
+
+    list-style-type:none;
+    text-align:center;
+    margin:0auto; padding:0px;
+    display:block; overflow:hidden;
+    background-color: #3BAF9F;
+    background-position: center top;
+  }
+  li {
+    display:inline-block;
+  }
+  li a {
+    color: #FFFFFF;
+    display:block;
+    padding:8px;
+    background-color: #3BAF9F;
+    background-position: center top;
+  }
+  .example3 {
+    background-position: justify top;
+    background-repeat: no-repeat;
+    font-family: Astigmatic;
+    text-align: justify;
+    font-size:25;
+    background-color: #3BAF9F;
+    color: #FFFFFF;
+  }
+  .regform{
+    background-position: right;
+
+    width: 400px;
+    background-color: rgba(0,0,0,0.6);
+    margin:auto;
+    color: #FFFFFF;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    border-radius: 15px 15px 0px 0px;
+  }
+  .main{
+
+    background-color: rgb(0,0,0,0.5);
+    background-position: right;
+    width:400px;
+    border-radius: 0px 0px 15px 15px;
+    margin: auto;
+  }
+  form{
+    padding: 10px;
+    background-position: right;
+  }
+  .emailname{
+    text-align: center;
+    color: white;
+  }
+  .backimage{
+    height: 100%;
+    width: 100%;
+    background-image: 100%;
+  }
+</style>
+</head>
+<body>
+  <div class="topnav">
+    <div class = "example3">
+      <div class="backimage">
+        <h1 align= "justify"><p style = "font-family: sans-serif"><img th:src="@{images/videoconference.png}" alt="Logo"><i>Meet</i> UP </p></h1>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <br>
+        <br>
+        <li>
+
+        </li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/create-meeting">Create Meeting</a></li>
+        <li><a href="https://drive.google.com/drive/u/0/my-drive"target="_blank">Assignment</a></li>
+        <li><a href="https://docs.google.com/forms/u/0/"target="_blank">Test</a></li>
+        <li><a href="/about-us">About Us</a></li>
+        <li th:if="${not loggedin}"><a href="/login">Login</a></li>
+        <li th:if="${not loggedin}"><a href="/register">Register</a></li>
+        <li th:if="${loggedin}"><a href="/logout">Sign Out</a></li>
+      </li>
+    </ul>
+    <br>
+    <br>
+  </nav>
+  <div class="regform">
+    <h1>About Us</h1></div>
+    <div class="main"><br>
+      <div class="emailname">
+        <h4>You can write to us at -</h4>
+        <h4>kirtipatkar4@student.sfit.ac.in</h4>
+        <h4>pawarvedant09@student.sfit.ac.in</h4>
+        <h4>parmartanish14@student.sfit.ac.in</h4>
+        <h4>Manavparmar1609@student.sfit.ac.in</h4><br>
+        <h4>These pages have also been linked at the top of
+          every page</h4>
+        </div>
+        <form autocomplete="off" action="#" th:action="@{/register}"
+        th:object="${user}" method="post" class="form-signin" role="form">
+
+        <div class="form-group">
+
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

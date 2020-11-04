@@ -113,7 +113,14 @@ public class MiniprojectController {
 		return mav;
 	}
 	
-	
+	@GetMapping("/about-us")
+	@ResponseBody
+	public ModelAndView aboutus(Principal principal) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("loggedin",principal!=null);
+		mav.setViewName("aboutus.html");
+		return mav;
+	}
 	
 	
 	@GetMapping("/meeting")

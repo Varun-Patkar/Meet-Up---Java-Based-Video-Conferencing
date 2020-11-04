@@ -1,20 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Up - Error</title>
+  <link rel = "icon" href = "videoconference.png" type = "image/x-icon">
+  <style type="text/css">
+  h2{
+    color:#FF0000;
+  }
+  *{
+    margin:0;
+    padding:0;
+  }
+  body
+  {
+
+    background-image:url("images/meetup.png");
+    background-color: #FFFFFF;
+    margin-top: 40px;
+    background-position: right;
+    background-size: cover;
+    font-family: sans-serif;
+    margin: 0px;
+  }
+  nav
+  {
+
+    background-position: center;
+    background-size: cover;
+    font-family: sans-serif;
+    align-content: center;
+    top: 0;
+    padding-top: 0;
+    margin: 0;
+    position: relative;
+  }
+  ul {
+
+    list-style-type:none;
+    text-align:center;
+    margin:0auto; padding:0px;
+    display:block; overflow:hidden;
+    background-color: #3BAF9F;
+    background-position: center top;
+
+  }
+
+  li {
+    display:inline-block;
+  }
+
+  li a {
+    color: #000000;
+    display:block;
+    padding:8px;
+    background-color: #3BAF9F;
+    background-position: center top;
+  }
+
+  .example3 {
+    color: #FFFFFF;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Astigmatic;
+    background-position: center top;
+    background-color:#3BAF9F;
+    font-size: 33.5px;
+
+  }
+  .topnav {
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
+
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent;
+  }
+
+  .topnav a:hover {
+    border-bottom: 3px solid black;
+  }
+
+  .topnav a.active {
+    border-bottom: 3px solid black;
+  }
+</style>
 </head>
 <body>
-    <h1>Error</h1>
-    <br>
-    <li><a href="/">Home</a></li>
-    <li><a href="/create-meeting">Create Meeting</a></li>
-    <li th:if="${loggedin}"><a href="/logout">Sign Out</a></li>
-    <li th:if="${not loggedin}"><a href="/login">Login</a></li>
-    <li th:if="${not loggedin}"><a href="/register">Register</a></li>
-    <br>
-    <br>
-    <h2 th:text="${error}"></h2>
+  <div class="topnav">
+    <nav>
+      <ul>
+        <div class  = "example3">
+          <h1 align= "left"><p style = "font-family: sans-serif"><img th:src="@{images/Logo.png}" alt="Logo" width="170" height="85"></p></h1>
+        </div>
+
+        <br>
+        <li><a href="/">Home</a></li>
+        <li><a href="/create-meeting">Create Meeting</a></li>
+        <li><a href="https://drive.google.com/drive/u/0/my-drive"target="_blank">Assignment</a></li>
+        <li><a href="https://docs.google.com/forms/u/0/"target="_blank">Test</a></li>
+        <li><a href="/about-us">About Us</a></li>
+        <br>
+        <br>
+
+      </ul>
+    </nav>
+  </div>
+  <h2 th:text="${error}"></h2>
+  <p>
+    <h2>Oops !!!! Error Encountered</h2>
+  </p>
 </body>
 </html>

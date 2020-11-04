@@ -1,39 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Up - Login</title>
+  <link rel = "icon" href = "videoconference.png" type = "image/x-icon">
+  <style type="text/css">
+
+  *{
+    margin:0;
+    padding:0;
+  }
+  body
+  {
+    background-image:url("images/meetup.png");
+    background-color: #FFFFFF;
+    margin-top: 40px;
+    background-position: right;
+    background-size: cover;
+    font-family: sans-serif;
+    margin: 0px;
+  }
+  nav
+  {
+
+    background-position: center;
+    background-size: cover;
+    font-family: sans-serif;
+    align-content: center;
+    top: 0;
+    padding-top: 0;
+    margin: 0;
+    position: relative;
+  }
+  .signform{
+    width: 400px;
+    background-color: rgba(0,0,0,0.6);
+    background-position: right;
+    margin:auto;
+    color: #FFFFFF;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    border-radius: 15px 15px 0px 0px;
+  }
+  .mainin{
+    background-color: rgb(0,0,0,0.5);
+    background-position: right;
+    width:400px;
+    border-radius: 0px 0px 15px 15px;
+    margin: auto;
+  }
+  form{
+    padding: 10px;
+  }
+  #name{
+    width: 100%;
+    height: 100px;
+  }
+  .name{
+    margin-left: 25px;
+    margin-top: 30px;
+    line-height: 30px;
+    width: 100px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+
+  }
+  .email{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 30px;
+    width: 100px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+  }
+  .password{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 30px;
+    width: 100px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+
+  }
+  button{
+    background-color: #3BAF9F;
+    display: block;
+    margin:50px 0px 0px 50px;
+    text-align: center;
+    border-radius: 12px;
+    border:2px solid #366473;
+    padding: 14px 14px;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    transform: 0.25px;
+    margin-left: 35%;
+  }
+  button:hover{
+    background-color:#5390F5;
+  }
+
+  span{
+    color: #777;
+    font-size: 12px;
+    bottom: 68px;
+    position: absolute;
+  }
+  ul {
+
+    list-style-type:none;
+    text-align:center;
+    margin:0auto; padding:0px;
+    display:block; overflow:hidden;
+    background-color: #3BAF9F;
+    background-position: center top;
+
+  }
+
+  li {
+    display:inline-block;
+  }
+
+  li a {
+    color: #FFFFFF;
+    display:block;
+    padding:8px;
+    background-color: #3BAF9F;
+    background-position: center top;
+  }
+
+  .example3 {
+    color: #FFFFFF;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Astigmatic;
+    background-position: center top;
+    background-color:#3BAF9F;
+    font-size: 33.5px;
+
+  }
+  .topnav {
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
+
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent;
+  }
+
+  .topnav a:hover {
+    border-bottom: 3px solid black;
+  }
+
+  .topnav a.active {
+    border-bottom: 3px solid black;
+  }
+  img {
+    width: 3%;
+    height: 3%;
+  }
+</style>
 </head>
 <body>
-    <h1>Login</h1>
-    <br>
-    <li><a href="/">Home</a></li>
-    <li><a href="/create-meeting">Create Meeting</a></li>
-    <li th:if="${loggedin}"><a href="/logout">Sign Out</a></li>
-    <li th:if="${not loggedin}"><a href="/login">Login</a></li>
-    <li th:if="${not loggedin}"><a href="/register">Register</a></li>
-    <br>
-    <br>
+  <div class="topnav">
+    <nav>
+      <ul>
+        <div class  = "example3">
+          <h1 align= "left"><p style = "font-family: sans-serif"><img th:src="@{images/videoconference.png}" alt="Logo"><i>Meet </i>UP </p></h1>
+        </div>
+        <br>
+        <br>
+        <li><a href="/">Home</a></li>
+        <li><a href="/create-meeting">Create Meeting</a></li>
+        <li><a href="https://drive.google.com/drive/u/0/my-drive"target="_blank">Assignment</a></li>
+        <li><a href="https://docs.google.com/forms/u/0/"target="_blank">Test</a></li>
+        <li><a href="/about-us">About Us</a></li>
+        <li th:if="${not loggedin}"><a href="/login">Login</a></li>
+        <li th:if="${not loggedin}"><a href="/register">Register</a></li>
+        <li th:if="${loggedin}"><a href="/logout">Sign Out</a></li>
+      </ul>
+      <br>
+      <br>
+    </nav>
+  </div>
+  <div class="signform"><h1>Sign In</h1></div>
+  <div class="mainin">
     <form th:action="@{/login}" method="post" class="form-signin" role="form" autocomplete="off" action="#" >
-        <div class="form-group">
-            <div class="">
-                <input type="text"id="email" name="email" th:placeholder="Email" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="">
-                <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="">
-                <button type="submit" class="btn btn-primary btn-block"  name="Submit" value="Login" th:text="Login">Register User</button>
-            </div>
-        </div>
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">Email or Password is invalid.</p>
-        </div>
-    </form>
+
+      <div id="name">
+        <h2 class="name">Email ID:</h2>
+
+        <input type="text" id="email" name="email" th:placeholder="Email" class="email" /><br>
+        <h2 class="name">Password:</h2>
+
+        <input type="password" th:placeholder="Password" id="password" name="password" class="password" /><br>
+      </div>
+
+      <div>
+        <br>
+        <button type="submit" class="btn btn-primary btn-block"  name="Submit" value="Login" th:text="Login">Sign In</button>
+      </div>
+    </div>
+    <div align="center" th:if="${param.error}">
+      <p style="font-size: 20; color: #FF1C19;">Email or Password is invalid.</p>
+    </div>
+  </div>
+</form>
+
+
+</div>
 </body>
 </html>
