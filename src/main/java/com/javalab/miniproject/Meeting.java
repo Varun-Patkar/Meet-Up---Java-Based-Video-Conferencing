@@ -17,7 +17,7 @@ public class Meeting {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	public long meetingid;
+	public long meeting_id;
 	
 	private int host_id;
 	
