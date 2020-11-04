@@ -166,7 +166,7 @@ public class MiniprojectController {
 	public ModelAndView login(Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("loggedin",principal!=null);
-		modelAndView.setViewName("login"); // resources/template/login.html
+		modelAndView.setViewName("login.html"); // resources/template/login.html
 		return modelAndView;
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -175,7 +175,7 @@ public class MiniprojectController {
 		modelAndView.addObject("loggedin",principal!=null);
 		User user = new User();
 		modelAndView.addObject("user", user); 
-		modelAndView.setViewName("register"); // resources/template/register.html
+		modelAndView.setViewName("register.html"); // resources/template/register.html
 		return modelAndView;
 	}
 	
