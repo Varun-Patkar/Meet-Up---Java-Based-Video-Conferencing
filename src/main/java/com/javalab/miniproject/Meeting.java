@@ -17,7 +17,7 @@ public class Meeting {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	public long meeting_id;
+	public long meetingid;
 	
 	private int host_id;
 	
@@ -48,13 +48,13 @@ public class Meeting {
 		
 	}
 	public Meeting(long meetingid,int host_id) {
-		this.meeting_id=meetingid;
+		this.meetingid=meetingid;
 		this.host_id=host_id;
 		participants_id=new ArrayList<Integer>();
 	}
 	
 	public Meeting(long meetingid,int host_id,List<Integer> participants_id) {
-		this.meeting_id=meetingid;
+		this.meetingid=meetingid;
 		this.host_id=host_id;
 		this.participants_id=participants_id;
 	}
@@ -66,10 +66,10 @@ public class Meeting {
 		this.id=id;
 	}
 	public long getId() {
-		return meeting_id;
+		return meetingid;
 	}
 	public void setId(long meetingid) {
-		this.meeting_id = meetingid;
+		this.meetingid = meetingid;
 	}
 	public int getHost_id() {
 		return host_id;

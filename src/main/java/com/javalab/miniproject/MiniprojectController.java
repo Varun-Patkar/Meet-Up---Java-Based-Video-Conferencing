@@ -66,7 +66,7 @@ public class MiniprojectController {
 			mav.setViewName("error.html");
 			return mav;
 		}
-		List<Meeting> byID=meetingRepository.findByMeeting_id(query.getId());
+		List<Meeting> byID=meetingRepository.findByMeetingid(query.getId());
 		ModelAndView mav=new ModelAndView();
 		if (byID==null){
 			mav.addObject("error","No such Meeting exists");
@@ -102,7 +102,7 @@ public class MiniprojectController {
 	    long meeting_id=123456;
 	    do {
 	    meeting_id=rnd.nextInt(900000)+100000;
-	    }while(meetingRepository.findByMeeting_id(meeting_id).size()!=0);
+	    }while(meetingRepository.findByMeetingid(meeting_id).size()!=0);
 	    Meeting meeting = new Meeting(meeting_id,userService.findUserByEmail(principal.getName()).getId());
 	    meeting.setUnencrpass(pass);
 		meeting.setMeetingPassword(passwordEncoder1().encode(pass));
@@ -127,7 +127,7 @@ public class MiniprojectController {
 	@ResponseBody
 	public ModelAndView meeting(Model model,Principal principal){
 		ModelAndView mav=new ModelAndView();
-		Meeting meeting=meetingRepository.findByMeeting_id(currentMeetingID).get(0);
+		Meeting meeting=meetingRepository.findByMeetingid(currentMeetingID).get(0);
 		mav.addObject("title","Meeting-"+meeting.getId());
 		mav.addObject("meeting_id",meeting.getId());
 		mav.addObject("meeting_password", meeting.getUnencrpass());
@@ -147,7 +147,7 @@ public class MiniprojectController {
 	@ResponseBody
 	public ModelAndView exit_meeting(Model model,Principal principal){
 		host=false;
-		Meeting meeting=meetingRepository.findByMeeting_id(currentMeetingID).get(0);
+		Meeting meeting=meetingRepository.findByMeetingid(currentMeetingID).get(0);
 		if(meeting.getParticipants_id().contains(userService.findUserByEmail(principal.getName()).getId())) {
 			jdbcTemplate.update("DELETE FROM `miniproject_db`.`meeting_participants_id` WHERE (`meeting_id` = '"+meeting.getId1()+"');");
 			return new ModelAndView("redirect:/");
