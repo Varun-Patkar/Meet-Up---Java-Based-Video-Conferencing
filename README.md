@@ -1,17 +1,17 @@
-# Java Mini Project(Unnamed) #
+# Meet UP - Java Based Video Conferencing Website #
 
 
 
 ### Implemented ###
-* 2 Preople meeting prototype ready 
+* Multiple People Meeting
+* Hosted on Heroku and ready for multiple connections
+
 
 
 ### Ideas to be Implemented ###
 
-* Multiple People Video and Audio Transfer
 * A general chat with ability to add files
 * An Assignment Tab for teachers to assign assignments and students to submit
-* 3 Types of users- Super User, Teacher, Student(Accounts, etc.)
 * Recording can be accessed by students also.
 
 
