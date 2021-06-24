@@ -1,6 +1,12 @@
 # Meet UP - Java Based Video Conferencing Website #
 
+Java Mini Project for Sem 3
 
+### Group Members ##
+- Varun Patkar
+- Vedant Pawar
+- Tanish Parmar
+- Manav Parmar
 
 ### Implemented ###
 * Multiple People Meeting
@@ -21,8 +27,6 @@
 * Add native support for Jupyter Notebooks 
 * Add a hyperlink to online compiler to copy paste and run and practice any programs (if needed)
 
-### Group Members ##
--Varun Patkar
--Vedant Pawar
--Tanish Parmar
--Manav Parmar
+# Deployment #
+
+[Meet UP Deployment](http://meet-up-video-conference.herokuapp.com/)
